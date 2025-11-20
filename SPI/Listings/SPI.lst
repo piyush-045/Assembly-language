@@ -1,0 +1,123 @@
+A51 MACRO ASSEMBLER  SPI                                                                  05/07/2025 14:26:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\SPI.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE SPI.asm SET(SMALL) DEBUG PRINT(.\Listings\SPI.lst) OBJECT(.\Objects\SPI
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+  00B1                 2             P0M1 EQU 0B1H
+  00B2                 3             P0M2 EQU 0B2H
+  00B3                 4             P1M1 EQU 0B3H
+  00B4                 5             P1M2 EQU 0B4H
+  00AC                 6             P3M1 EQU 0ACH
+  00AD                 7             P3M2 EQU 0ADH
+0000 75B100            8                     MOV P0M1, #00H
+0003 75B1FF            9                     MOV P0M1, #0FFH
+0006 75B300           10                     MOV P1M1, #00H
+0009 75B4FF           11                     MOV P1M2, #0FFH
+000C 75AC00           12                     MOV     P3M1, #00H
+000F 75ADFF           13                     MOV     P3M2, #0FFH
+  00B0                14     SS   EQU P3.0
+  00F3                15     SPCR EQU 0F3H
+  00F4                16     SPSR EQU 0F4H
+  00F5                17     SPDR EQU 0F5H
+  0091                18     SFRS EQU 091H
+  00C7                19     TA   EQU 0C7H
+0012 1126             20     START: ACALL SETUP
+0014 C2B0             21                CLR SS
+0016 112A             22                ACALL ENABLE
+0018 112E             23                ACALL CL
+001A 113A             24                ACALL CL2
+001C 1146             25                ACALL CMD
+001E 1152             26                ACALL SEND
+0020 D2B0             27                SETB SS
+0022 115E             28                ACALL STOP
+0024 80EC             29                SJMP START
+                      30              
+0026 43F393           31     SETUP:  ORL SPCR,#10010011B
+0029 22               32                     RET
+002A 43F340           33     ENABLE: ORL SPCR,#01000000B 
+002D 22               34                     RET
+002E 75F500           35     CL:     MOV SPDR,#00H
+0031 E5F4             36                     MOV A,SPSR
+0033 B480FD           37                     M1:CJNE A,#080H,M1
+0036 53F47F           38                     ANL SPSR,#01111111B
+0039 22               39                     RET
+003A 75F500           40     CL2:    MOV SPDR,#00H
+003D E5F4             41                     MOV A,SPSR
+003F B480FD           42                     M2:CJNE A,#080H,M2
+0042 53F47F           43                     ANL SPSR,#01111111B
+0045 22               44                     RET
+0046 75F511           45     CMD:    MOV SPDR,#011H
+0049 E5F4             46                     MOV A,SPSR
+004B B480FD           47                     M3:CJNE A,#080H,M3
+004E 53F47F           48                     ANL SPSR,#01111111B
+0051 22               49                     RET
+0052 75F5FF           50     SEND:   MOV SPDR,#0FFH
+0055 E5F4             51                     MOV A,SPSR
+0057 B480FD           52                     M4:CJNE A,#080H,M4
+005A 53F47F           53                     ANL SPSR,#01111111B
+005D 22               54                     RET
+                      55                     
+005E 53F300           56     STOP:   ANL SPCR,#00000000B
+0061 22               57                     RET
+A51 MACRO ASSEMBLER  SPI                                                                  05/07/2025 14:26:32 PAGE     2
+
+                      58     
+0062 781E             59     DELAY:  MOV R0,#30
+0064 79FA             60     HERE3:  MOV R1,#250
+0066 7AFA             61     HERE2:  MOV R2,#250
+0068 DAFE             62     HERE1:  DJNZ R2,HERE1
+006A D9FA             63                     DJNZ R1,HERE2
+006C D8F6             64                     DJNZ R0,HERE3
+                      65                     
+006E 22               66                     RET
+                      67     END
+                                        
+A51 MACRO ASSEMBLER  SPI                                                                  05/07/2025 14:26:32 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CL . . . . . . . .  C ADDR   002EH   A   
+CL2. . . . . . . .  C ADDR   003AH   A   
+CMD. . . . . . . .  C ADDR   0046H   A   
+DELAY. . . . . . .  C ADDR   0062H   A   
+ENABLE . . . . . .  C ADDR   002AH   A   
+HERE1. . . . . . .  C ADDR   0068H   A   
+HERE2. . . . . . .  C ADDR   0066H   A   
+HERE3. . . . . . .  C ADDR   0064H   A   
+M1 . . . . . . . .  C ADDR   0033H   A   
+M2 . . . . . . . .  C ADDR   003FH   A   
+M3 . . . . . . . .  C ADDR   004BH   A   
+M4 . . . . . . . .  C ADDR   0057H   A   
+P0M1 . . . . . . .  N NUMB   00B1H   A   
+P0M2 . . . . . . .  N NUMB   00B2H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+P3M1 . . . . . . .  N NUMB   00ACH   A   
+P3M2 . . . . . . .  N NUMB   00ADH   A   
+SEND . . . . . . .  C ADDR   0052H   A   
+SETUP. . . . . . .  C ADDR   0026H   A   
+SFRS . . . . . . .  N NUMB   0091H   A   
+SPCR . . . . . . .  N NUMB   00F3H   A   
+SPDR . . . . . . .  N NUMB   00F5H   A   
+SPSR . . . . . . .  N NUMB   00F4H   A   
+SS . . . . . . . .  B ADDR   00B0H.0 A   
+START. . . . . . .  C ADDR   0012H   A   
+STOP . . . . . . .  C ADDR   005EH   A   
+TA . . . . . . . .  N NUMB   00C7H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

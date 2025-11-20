@@ -1,0 +1,119 @@
+A51 MACRO ASSEMBLER  UART                                                                 05/23/2025 12:03:43 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\uart.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE uart.asm SET(SMALL) DEBUG PRINT(.\Listings\uart.lst) OBJECT(.\Objects\u
+                      art.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+  00B1                 2                     P0M1 EQU 0B1H
+  00B2                 3                     P0M2 EQU 0B2H
+0000 75B100            4                     MOV P0M1,#00H      ;0000 0000
+0003 75B2FF            5                 MOV P0M2,#0FFH         ;1111 1111
+  00C4                 6                     T3CON EQU 0C4H
+  00C6                 7                 RH3   EQU 0C6H                              ;Timer 3 reload high byte
+  00C5                 8                 RL3   EQU 0C5H
+                       9                     
+                      10             
+                      11             
+0006 90003B           12     MAIN:   MOV DPTR,#PAGE_SWITCH
+0009 7400             13                     MOV A,#0
+000B 1111             14                     ACALL UART_SETUP
+000D 1127             15                     ACALL T_X
+000F 80FE             16                     SJMP $
+                      17                             
+0011 759850           18     UART_SETUP:MOV SCON,#50H
+0014 758780           19             MOV PCON,#10000000B                ;DOUBLE BOUD RATE ENABLE
+0017 53C4F8           20             ANL T3CON,#11111000B   
+001A 43C420           21             ORL T3CON,#00100000B               ;TIMER 3 AS BOUD RATE CLOCK SOURCE SELECT,Timer 
+                             3 is used because it is 16 bit autoreload timer
+001D 75C6FF           22             MOV RH3,#0FFH
+0020 75C599           23             MOV RL3,#099H                      ;9600 
+0023 43C408           24             ORL T3CON,#00001000B               ;TR2 START
+                      25             ;MOV IE,#10010000B
+0026 22               26             RET
+                      27             
+0027 93               28     T_X:    MOVC A,@A+DPTR
+0028 A3               29                     INC DPTR
+0029 B4FF01           30                     CJNE A,#0FFH,SEND_DATA
+002C 22               31                     RET
+                      32              
+002D 120033           33     SEND_DATA:LCALL TRANSMIT
+0030 E4               34                     CLR A
+0031 80F4             35                     SJMP T_X
+                      36     
+                      37     
+0033 F599             38     TRANSMIT:MOV SBUF,A
+0035 3099FD           39     HERE4: JNB TI,HERE4
+0038 C299             40            CLR TI
+003A 22               41                RET
+                      42     
+                      43     
+003B                  44     PAGE_SWITCH:
+003B 5AA50782         45                     DB 5AH,0A5H,07H,82H,00H,84H,5AH,01H,00H,0FFH
+003F 00845A01                
+0043 00FF                    
+                      46                             
+                      47     END
+                                                     
+                                                     
+                             ;                       
+                             ;AGAIN:  MOV A,#44H
+                             ;        ACALL UART_SETUP
+                             ;               ACALL TX
+                             ;               SJMP   $  ;AGAIN
+A51 MACRO ASSEMBLER  UART                                                                 05/23/2025 12:03:43 PAGE     2
+
+                             ;               
+                             ;               
+                             ;UART_SETUP:MOV SCON,#50H
+                             ;       MOV PCON,#10000000B                ;DOUBLE BOUD RATE ENABLE
+                             ;       ANL T3CON,#11111000B   
+                             ;       ORL T3CON,#00100000B               ;TIMER 3 AS BOUD RATE CLOCK SOURCE SELECT,Timer 
+                             3 is used because it is 16 bit autoreload timer
+                             ;       MOV RH3,#0FFH
+                             ;       MOV RL3,#099H                      ;9600 
+                             ;       ORL T3CON,#00001000B               ;TR2 START
+                             ;       ;MOV IE,#10010000B
+                             ;       RET
+                             ;       
+                             ;               
+                             ;TX:            MOV SBUF,A
+                             ;WAIT:  JNB TI,WAIT
+                             ;               CLR TI
+                             ;               RET
+                             ;END
+                             ;               
+A51 MACRO ASSEMBLER  UART                                                                 05/23/2025 12:03:43 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE4. . . . . . .  C ADDR   0035H   A   
+MAIN . . . . . . .  C ADDR   0006H   A   
+P0M1 . . . . . . .  N NUMB   00B1H   A   
+P0M2 . . . . . . .  N NUMB   00B2H   A   
+PAGE_SWITCH. . . .  C ADDR   003BH   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RH3. . . . . . . .  N NUMB   00C6H   A   
+RL3. . . . . . . .  N NUMB   00C5H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SEND_DATA. . . . .  C ADDR   002DH   A   
+T3CON. . . . . . .  N NUMB   00C4H   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TRANSMIT . . . . .  C ADDR   0033H   A   
+T_X. . . . . . . .  C ADDR   0027H   A   
+UART_SETUP . . . .  C ADDR   0011H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

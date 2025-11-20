@@ -1,0 +1,54 @@
+A51 MACRO ASSEMBLER  UART_RX                                                              05/02/2025 12:17:47 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Uart_rx.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Uart_rx.asm SET(SMALL) DEBUG PRINT(.\Listings\Uart_rx.lst) OBJECT(.\Obj
+                      ects\Uart_rx.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+  00B3                 2                     P1M1 EQU 0B3H
+  00B4                 3                     P1M2 EQU 0B4H
+0000 75B300            4                     MOV P1M1,#00H
+0003 75B4FF            5                 MOV P1M2,#0FFH
+                       6                     
+0006 110A              7     AGAIN:  ACALL RX
+0008 80FC              8                     SJMP AGAIN
+                       9                     
+000A 758920           10     RX:     MOV TMOD,#20H
+000D 759850           11                     MOV SCON,#50H
+0010 758DFC           12                     MOV TH1,#0FCH     ;aprox 9600 bradrate
+0013 D28E             13                     SETB TR1
+0015 3098FD           14     WAIT:   JNB RI,WAIT
+0018 E599             15                     MOV A,SBUF
+001A C298             16                     CLR RI
+001C 22               17                     RET
+                      18     END
+                                             
+A51 MACRO ASSEMBLER  UART_RX                                                              05/02/2025 12:17:47 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0006H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+RX . . . . . . . .  C ADDR   000AH   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+WAIT . . . . . . .  C ADDR   0015H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

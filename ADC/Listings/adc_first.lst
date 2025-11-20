@@ -1,0 +1,95 @@
+A51 MACRO ASSEMBLER  ADC_FIRST                                                            05/12/2025 16:44:39 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\adc_first.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE adc_first.asm SET(SMALL) DEBUG PRINT(.\Listings\adc_first.lst) OBJECT(.
+                      \Objects\adc_first.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+                       2             
+  0091                 3                     SFRS EQU 091H
+  00E8                 4                     ADCCON0 EQU 0E8H
+  00E1                 5                     ADCCON1 EQU 0E1H
+  0099                 6                     AINDIDS1 EQU 099H
+  00EF                 7                     ADCF EQU 0EFH
+  00EE                 8                     ADCS EQU 0EEH
+  00C3                 9                     ADCRH EQU 0C3H
+  00C2                10                     ADCRL EQU 0C2H
+  00E1                11                     ADCEN EQU 0E1H          
+0000 759102           12                     MOV SFRS,#02H                                           ;Port 2 P2M1,P2M2 M
+                             ODE SELACTION REGISTERS ON PAGE 2
+0003 7589FF           13                     MOV 089H,#11111111B                 ;P2.3 input mode for adc CH.11,P2.4 inp
+                             ut mode adc CH.12
+0006 758A00           14                     MOV 08AH,#00000000B                     
+0009 759100           15                     MOV SFRS,#0H
+                      16     
+000C                  17     MAIN:
+000C 1110             18                     ACALL ADC
+000E 80FE             19     HERE:   SJMP HERE
+                      20     
+                      21     
+                      22     
+0010                  23     ADC:                               ;ADC2 CH.11 
+0010 120029           24                     LCALL ADC_SETUP                 ;P23
+                      25                     
+0013 C2EF             26                     CLR ADCF                            
+0015 D2EE             27                     SETB ADCS                           
+0017 30EFFD           28     LABEL1: JNB ADCF,LABEL1             
+001A E5C3             29                     MOV A,ADCRH                        ;
+001C C4               30                     SWAP A
+001D FC               31                     MOV R4,A
+001E 540F             32                     ANL A,#0FH
+0020 FE               33                     MOV R6,A
+0021 EC               34                     MOV A,R4
+0022 54F0             35                     ANL A,#0F0H
+0024 AFC2             36                     MOV R7,ADCRL
+0026 4F               37                     ORL A,R7
+0027 FF               38                     MOV R7,A
+0028 22               39             RET                       
+                      40     
+0029                  41     ADC_SETUP:
+0029 53E8F3           42                     ANL ADCCON0,#11110011B              ;OFF CH.12
+002C 43E80B           43                     ORL ADCCON0,#00001011B              ;SET CH.11  Pin 2.3
+002F C2AF             44                     CLR EA
+0031 759102           45                     MOV SFRS,#02H
+0034 759900           46                     MOV AINDIDS1,#0H
+0037 439908           47                     ORL AINDIDS1,#08H
+003A 759100           48                     MOV SFRS,#0H
+003D D2AF             49                     SETB EA
+003F 43E101           50                     ORL ADCCON1,#01H                 
+0042 22               51                     RET     
+                      52     
+                      53                     
+                      54     END
+A51 MACRO ASSEMBLER  ADC_FIRST                                                            05/12/2025 16:44:39 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADC. . . . . . . .  C ADDR   0010H   A   
+ADCCON0. . . . . .  N NUMB   00E8H   A   
+ADCCON1. . . . . .  N NUMB   00E1H   A   
+ADCEN. . . . . . .  N NUMB   00E1H   A   
+ADCF . . . . . . .  N NUMB   00EFH   A   
+ADCRH. . . . . . .  N NUMB   00C3H   A   
+ADCRL. . . . . . .  N NUMB   00C2H   A   
+ADCS . . . . . . .  N NUMB   00EEH   A   
+ADC_SETUP. . . . .  C ADDR   0029H   A   
+AINDIDS1 . . . . .  N NUMB   0099H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+HERE . . . . . . .  C ADDR   000EH   A   
+LABEL1 . . . . . .  C ADDR   0017H   A   
+MAIN . . . . . . .  C ADDR   000CH   A   
+SFRS . . . . . . .  N NUMB   0091H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

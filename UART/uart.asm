@@ -1,0 +1,73 @@
+ORG 00H
+		P0M1 EQU 0B1H
+		P0M2 EQU 0B2H
+		MOV P0M1,#00H      ;0000 0000
+	    MOV P0M2,#0FFH	   ;1111 1111
+		T3CON EQU 0C4H
+	    RH3   EQU 0C6H				;Timer 3 reload high byte
+	    RL3   EQU 0C5H
+		
+	
+	
+MAIN:	MOV DPTR,#PAGE_SWITCH
+		MOV A,#0
+		ACALL UART_SETUP
+		ACALL T_X
+		SJMP $
+			
+UART_SETUP:MOV SCON,#50H
+	MOV PCON,#10000000B                ;DOUBLE BOUD RATE ENABLE
+	ANL T3CON,#11111000B   
+	ORL T3CON,#00100000B               ;TIMER 3 AS BOUD RATE CLOCK SOURCE SELECT,Timer 3 is used because it is 16 bit autoreload timer
+	MOV RH3,#0FFH
+	MOV RL3,#099H                      ;9600 
+	ORL T3CON,#00001000B               ;TR2 START
+	;MOV IE,#10010000B
+	RET
+	
+T_X:	MOVC A,@A+DPTR
+		INC DPTR
+		CJNE A,#0FFH,SEND_DATA
+		RET
+	 
+SEND_DATA:LCALL TRANSMIT
+		CLR A
+		SJMP T_X
+
+
+TRANSMIT:MOV SBUF,A
+HERE4: JNB TI,HERE4
+       CLR TI
+	   RET
+
+
+PAGE_SWITCH:
+		DB 5AH,0A5H,07H,82H,00H,84H,5AH,01H,00H,0FFH
+			
+END
+			
+			
+;			
+;AGAIN:  MOV A,#44H
+;        ACALL UART_SETUP
+;		ACALL TX
+;		SJMP   $  ;AGAIN
+;		
+;		
+;UART_SETUP:MOV SCON,#50H
+;	MOV PCON,#10000000B                ;DOUBLE BOUD RATE ENABLE
+;	ANL T3CON,#11111000B   
+;	ORL T3CON,#00100000B               ;TIMER 3 AS BOUD RATE CLOCK SOURCE SELECT,Timer 3 is used because it is 16 bit autoreload timer
+;	MOV RH3,#0FFH
+;	MOV RL3,#099H                      ;9600 
+;	ORL T3CON,#00001000B               ;TR2 START
+;	;MOV IE,#10010000B
+;	RET
+;	
+;    		
+;TX:		MOV SBUF,A
+;WAIT:	JNB TI,WAIT
+;		CLR TI
+;		RET
+;END
+;		

@@ -1,0 +1,3 @@
+".\Objects\adc_first.obj" 
+TO ".\Objects\ADC_First" 
+PRINT(".\Listings\ADC_First.m51") RAMSIZE(256) 

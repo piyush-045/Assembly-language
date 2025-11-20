@@ -1,0 +1,116 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/07/2025  14:26:32  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\SPI.obj TO .\Objects\SPI PRINT (.\Listings\SPI.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\SPI.obj (SPI)
+
+
+LINK MAP OF MODULE:  .\Objects\SPI (SPI)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     006FH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\SPI (SPI)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SPI
+  C:002EH         SYMBOL        CL
+  C:003AH         SYMBOL        CL2
+  C:0046H         SYMBOL        CMD
+  C:0062H         SYMBOL        DELAY
+  C:002AH         SYMBOL        ENABLE
+  C:0068H         SYMBOL        HERE1
+  C:0066H         SYMBOL        HERE2
+  C:0064H         SYMBOL        HERE3
+  C:0033H         SYMBOL        M1
+  C:003FH         SYMBOL        M2
+  C:004BH         SYMBOL        M3
+  C:0057H         SYMBOL        M4
+  N:00B1H         SYMBOL        P0M1
+  N:00B2H         SYMBOL        P0M2
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  D:00B0H         SYMBOL        P3
+  N:00ACH         SYMBOL        P3M1
+  N:00ADH         SYMBOL        P3M2
+  C:0052H         SYMBOL        SEND
+  C:0026H         SYMBOL        SETUP
+  N:0091H         SYMBOL        SFRS
+  N:00F3H         SYMBOL        SPCR
+  N:00F5H         SYMBOL        SPDR
+  N:00F4H         SYMBOL        SPSR
+  B:00B0H.0       SYMBOL        SS
+  C:0012H         SYMBOL        START
+  C:005EH         SYMBOL        STOP
+  N:00C7H         SYMBOL        TA
+  C:0000H         LINE#         8
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/07/2025  14:26:32  PAGE 2
+
+
+  C:0003H         LINE#         9
+  C:0006H         LINE#         10
+  C:0009H         LINE#         11
+  C:000CH         LINE#         12
+  C:000FH         LINE#         13
+  C:0012H         LINE#         20
+  C:0014H         LINE#         21
+  C:0016H         LINE#         22
+  C:0018H         LINE#         23
+  C:001AH         LINE#         24
+  C:001CH         LINE#         25
+  C:001EH         LINE#         26
+  C:0020H         LINE#         27
+  C:0022H         LINE#         28
+  C:0024H         LINE#         29
+  C:0026H         LINE#         31
+  C:0029H         LINE#         32
+  C:002AH         LINE#         33
+  C:002DH         LINE#         34
+  C:002EH         LINE#         35
+  C:0031H         LINE#         36
+  C:0033H         LINE#         37
+  C:0036H         LINE#         38
+  C:0039H         LINE#         39
+  C:003AH         LINE#         40
+  C:003DH         LINE#         41
+  C:003FH         LINE#         42
+  C:0042H         LINE#         43
+  C:0045H         LINE#         44
+  C:0046H         LINE#         45
+  C:0049H         LINE#         46
+  C:004BH         LINE#         47
+  C:004EH         LINE#         48
+  C:0051H         LINE#         49
+  C:0052H         LINE#         50
+  C:0055H         LINE#         51
+  C:0057H         LINE#         52
+  C:005AH         LINE#         53
+  C:005DH         LINE#         54
+  C:005EH         LINE#         56
+  C:0061H         LINE#         57
+  C:0062H         LINE#         59
+  C:0064H         LINE#         60
+  C:0066H         LINE#         61
+  C:0068H         LINE#         62
+  C:006AH         LINE#         63
+  C:006CH         LINE#         64
+  C:006EH         LINE#         66
+  -------         ENDMOD        SPI
+
+Program Size: data=8.0 xdata=0 code=111
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

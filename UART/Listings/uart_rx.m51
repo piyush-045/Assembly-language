@@ -1,0 +1,58 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/02/2025  12:18:26  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\Uart_rx.obj TO .\Objects\uart_rx PRINT (.\Listings\uart_rx.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Uart_rx.obj (UART_RX)
+
+
+LINK MAP OF MODULE:  .\Objects\uart_rx (UART_RX)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001DH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\uart_rx (UART_RX)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        UART_RX
+  C:0006H         SYMBOL        AGAIN
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  B:0098H.0       SYMBOL        RI
+  C:000AH         SYMBOL        RX
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  D:008DH         SYMBOL        TH1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:0015H         SYMBOL        WAIT
+  C:0000H         LINE#         4
+  C:0003H         LINE#         5
+  C:0006H         LINE#         7
+  C:0008H         LINE#         8
+  C:000AH         LINE#         10
+  C:000DH         LINE#         11
+  C:0010H         LINE#         12
+  C:0013H         LINE#         13
+  C:0015H         LINE#         14
+  C:0018H         LINE#         15
+  C:001AH         LINE#         16
+  C:001CH         LINE#         17
+  -------         ENDMOD        UART_RX
+
+Program Size: data=8.0 xdata=0 code=29
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
