@@ -1,0 +1,59 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    04/29/2025  16:03:33  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\led_blink.obj TO .\Objects\led_blink PRINT (.\Listings\led_blink.m51) RAMSIZE (256
+>> )
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\led_blink.obj (LED_BLINK)
+
+
+LINK MAP OF MODULE:  .\Objects\led_blink (LED_BLINK)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001DH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\led_blink (LED_BLINK)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LED_BLINK
+  C:0012H         SYMBOL        D1
+  C:0014H         SYMBOL        D2
+  C:0016H         SYMBOL        D3
+  C:0010H         SYMBOL        DELAY
+  B:0090H.0       SYMBOL        LED
+  D:0090H         SYMBOL        P1
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  C:0006H         SYMBOL        WHILE
+  C:0000H         LINE#         6
+  C:0003H         LINE#         7
+  C:0006H         LINE#         13
+  C:0008H         LINE#         14
+  C:000AH         LINE#         17
+  C:000CH         LINE#         18
+  C:000EH         LINE#         19
+  C:0010H         LINE#         23
+  C:0012H         LINE#         24
+  C:0014H         LINE#         25
+  C:0016H         LINE#         26
+  C:0018H         LINE#         27
+  C:001AH         LINE#         28
+  C:001CH         LINE#         29
+  -------         ENDMOD        LED_BLINK
+
+Program Size: data=8.0 xdata=0 code=29
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

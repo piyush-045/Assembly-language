@@ -1,0 +1,66 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/03/2025  14:32:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\interrupt.obj TO .\Objects\interrupt PRINT (.\Listings\interrupt.m51) RAMSIZE (256
+>> )
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\interrupt.obj (INTERRUPT)
+
+
+LINK MAP OF MODULE:  .\Objects\interrupt (INTERRUPT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0048H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\interrupt (INTERRUPT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        INTERRUPT
+  C:0046H         SYMBOL        HERE
+  D:00A8H         SYMBOL        IE
+  C:0030H         SYMBOL        MAIN
+  D:0090H         SYMBOL        P1
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  C:0027H         SYMBOL        START
+  D:008DH         SYMBOL        TH1
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:0000H         LINE#         2
+  C:001BH         LINE#         6
+  C:001DH         LINE#         7
+  C:001FH         LINE#         8
+  C:0021H         LINE#         9
+  C:0024H         LINE#         10
+  C:0027H         LINE#         11
+  C:0030H         LINE#         17
+  C:0033H         LINE#         18
+  C:0036H         LINE#         20
+  C:0039H         LINE#         21
+  C:003CH         LINE#         22
+  C:003EH         LINE#         23
+  C:0041H         LINE#         24
+  C:0044H         LINE#         25
+  C:0046H         LINE#         26
+  -------         ENDMOD        INTERRUPT
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/03/2025  14:32:27  PAGE 2
+
+
+Program Size: data=8.0 xdata=0 code=72
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

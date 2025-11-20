@@ -1,0 +1,60 @@
+A51 MACRO ASSEMBLER  1_SECOND_DELAY                                                       04/29/2025 17:46:45 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\1_second_delay.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 1_second_delay.asm SET(SMALL) DEBUG PRINT(.\Listings\1_second_delay.lst
+                      ) OBJECT(.\Objects\1_second_delay.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+  00B3                 2                     P1M1 EQU 0B3H
+  00B4                 3                     P1M2 EQU 0B4H
+0000 75B300            4                     MOV P1M1,#00H
+0003 75B4FF            5                 MOV P1M2,#0FFH
+0006 758901            6                 MOV TMOD,#01      ;TIMER 0 ,MODE 1(16 BIT TIMER)
+0009 C290              7                     CLR P1.0
+                       8                     
+000B B290              9     HERE:   CPL P1.0         ;TOGGEL LED/TOGGEL PIN FOR SQURE PULSES/PULSES
+000D 7F15             10                     MOV R7,#21
+000F 758AFC           11     LOOP:   MOV TL0,#0FCH     ;HERE FOR 3 ms delay 47.61 ms/0.75 us(16 MHZ) = 63492 Timer valu 
+                             = 07FC
+0012 758C07           12                     MOV TH0,#07H      ;FFFF-F804+1 = 07FC
+0015 111B             13                     ACALL DELAY  
+0017 DFF6             14                     DJNZ R7,LOOP
+0019 80F0             15                     SJMP HERE
+                      16     
+                      17     
+001B D28C             18     DELAY:  SETB TR0
+001D 308DFD           19     AGAIN:  JNB TF0,AGAIN
+0020 C28C             20                     CLR TR0
+0022 C28D             21                     CLR TF0
+0024 22               22                     RET     
+                      23     END
+A51 MACRO ASSEMBLER  1_SECOND_DELAY                                                       04/29/2025 17:46:45 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   001DH   A   
+DELAY. . . . . . .  C ADDR   001BH   A   
+HERE . . . . . . .  C ADDR   000BH   A   
+LOOP . . . . . . .  C ADDR   000FH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

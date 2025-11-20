@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  TIMER_DELAY                                                          04/29/2025 15:54:27 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\timer_delay.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE timer_delay.asm SET(SMALL) DEBUG PRINT(.\Listings\timer_delay.lst) OBJE
+                      CT(.\Objects\timer_delay.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+  00B3                 2                     P1M1 EQU 0B3H
+  00B4                 3                     P1M2 EQU 0B4H
+0000 75B300            4                     MOV P1M1,#00H
+0003 75B4FF            5                 MOV P1M2,#0FFH
+                       6                     
+0006 B290              7     HERE:   CPL P1.0         ;TOGGEL LED/TOGGEL PIN FOR SQURE PULSES/PULSES
+0008 110C              8                     ACALL DELAY     
+000A 80FA              9                     SJMP HERE
+                      10             
+                      11     ;DELAY USING TIMER SUBROUINE (FUNCTION)
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18     
+                      19     
+                      20     
+                      21     
+000C 758901           22     DELAY:  MOV TMOD,#01      ;TIMER 0 ,MODE 1(16 BIT TIMER)
+000F 758AEB           23                     MOV TL0,#0EBH    
+0012 758CCB           24                     MOV TH0,#0CBH
+0015 D28C             25                     SETB TR0
+0017 308DFD           26     AGAIN:  JNB TF0,AGAIN
+001A C28C             27                     CLR TR0
+001C C28D             28                     CLR TF0
+001E 22               29                     RET     
+                      30     END
+A51 MACRO ASSEMBLER  TIMER_DELAY                                                          04/29/2025 15:54:27 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0017H   A   
+DELAY. . . . . . .  C ADDR   000CH   A   
+HERE . . . . . . .  C ADDR   0006H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

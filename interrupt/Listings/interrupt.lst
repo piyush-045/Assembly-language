@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  INTERRUPT                                                            05/03/2025 14:31:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\interrupt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE interrupt.asm SET(SMALL) DEBUG PRINT(.\Listings\interrupt.lst) OBJECT(.
+                      \Objects\interrupt.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020030            2                     LJMP MAIN
+                       3                     
+                       4     ;ISR FOR TIMER 1 
+001B                   5     ORG 001BH
+001B D80A              6                     DJNZ R0,START
+001D B290              7                     CPL P1.0
+001F 781C              8                     MOV R0,#28
+0021 758B00            9                     MOV TL1,#00H
+0024 758D00           10                     MOV TH1,#00H
+0027 32               11     START:  RETI
+                      12     ;MAIN PROGRAM
+0030                  13     ORG 0030H
+0030                  14     MAIN:
+  00B3                15                     P1M1 EQU 0B3H        
+  00B4                16                     P1M2 EQU 0B4H
+0030 75B3FE           17                     MOV P1M1,#0FEH       
+0033 75B401           18                     MOV P1M2,#01H        
+                      19                     
+0036 851089           20                     MOV TMOD,10H
+0039 75A888           21                     MOV IE,#88H
+003C 781C             22                     MOV R0,#28
+003E 758B00           23                     MOV TL1,#00H
+0041 758D00           24                     MOV TH1,#00H
+0044 D28E             25                     SETB TR1
+0046 80FE             26     HERE:   SJMP HERE
+                      27     
+                      28     END
+                                             
+                                     
+A51 MACRO ASSEMBLER  INTERRUPT                                                            05/03/2025 14:31:54 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0046H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+START. . . . . . .  C ADDR   0027H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

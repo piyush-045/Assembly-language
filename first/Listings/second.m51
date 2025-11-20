@@ -1,0 +1,58 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    04/26/2025  16:57:52  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\second.obj TO .\Objects\second PRINT (.\Listings\second.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\second.obj (SECOND)
+
+
+LINK MAP OF MODULE:  .\Objects\second (SECOND)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001DH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\second (SECOND)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SECOND
+  C:0012H         SYMBOL        D1
+  C:0014H         SYMBOL        D2
+  C:0016H         SYMBOL        D3
+  C:0010H         SYMBOL        DELAY
+  B:0090H.0       SYMBOL        LED
+  D:0090H         SYMBOL        P1
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  C:0006H         SYMBOL        WHILE
+  C:0000H         LINE#         6
+  C:0003H         LINE#         7
+  C:0006H         LINE#         10
+  C:0008H         LINE#         11
+  C:000AH         LINE#         14
+  C:000CH         LINE#         15
+  C:000EH         LINE#         16
+  C:0010H         LINE#         21
+  C:0012H         LINE#         22
+  C:0014H         LINE#         23
+  C:0016H         LINE#         24
+  C:0018H         LINE#         25
+  C:001AH         LINE#         26
+  C:001CH         LINE#         27
+  -------         ENDMOD        SECOND
+
+Program Size: data=8.0 xdata=0 code=29
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

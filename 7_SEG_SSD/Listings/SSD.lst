@@ -1,0 +1,66 @@
+A51 MACRO ASSEMBLER  SSD                                                                  04/29/2025 16:08:21 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\SSD.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE SSD.asm SET(SMALL) DEBUG PRINT(.\Listings\SSD.lst) OBJECT(.\Objects\SSD
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H 
+  00B3                 2                     P1M1 EQU 0B3H
+  00B4                 3                     P1M2 EQU 0B4H
+0000 75B300            4                     MOV P1M1,#00H
+0003 75B4FF            5                     MOV P1M2,#0FFH
+                       6             
+0006 7C0A              7     WHILE:  MOV R4,#10;    COUNTER
+0008 900400            8                     MOV DPTR,#MYDATA  ;0R MOV DPTR,#0400H
+                       9             
+000B E4               10     BACK:   CLR A
+000C 93               11                     MOVC A,@A+DPTR   
+000D F590             12                     MOV P1,A
+000F 1116             13                     ACALL DELAY
+0011 A3               14                     INC DPTR
+0012 DCF7             15                     DJNZ R4,BACK
+0014 80F0             16                     SJMP WHILE              
+                      17                     
+                      18     ;DELAY SUBROUTINE
+0016 7F64             19     DELAY:  MOV R7,#100
+0018 7E64             20     D1:             MOV R6,#100
+001A 7DFF             21     D2:             MOV R5,#255
+001C DDFE             22     D3:         DJNZ R5,D3
+001E DEFA             23                     DJNZ R6,D2
+0020 DFF6             24                     DJNZ R7,D1
+0022 22               25                     RET
+                      26                     
+0400                  27     ORG 0400H
+0400 C0F9A4B0         28     MYDATA: DB 0C0H,0F9H,0A4H,0B0H,99H,92H,82H,0F8H,80H,90H  
+0404 999282F8                
+0408 8090                    
+                      29             
+                      30     END
+A51 MACRO ASSEMBLER  SSD                                                                  04/29/2025 16:08:21 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   000BH   A   
+D1 . . . . . . . .  C ADDR   0018H   A   
+D2 . . . . . . . .  C ADDR   001AH   A   
+D3 . . . . . . . .  C ADDR   001CH   A   
+DELAY. . . . . . .  C ADDR   0016H   A   
+MYDATA . . . . . .  C ADDR   0400H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+WHILE. . . . . . .  C ADDR   0006H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,71 @@
+A51 MACRO ASSEMBLER  EXTERNAL_INTERRUPT                                                   05/03/2025 16:37:27 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\external_interrupt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE external_interrupt.asm SET(SMALL) DEBUG PRINT(.\Listings\external_inter
+                      rupt.lst) OBJECT(.\Objects\external_interrupt.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ========== External Interrupt ==========
+                       2     
+0000                   3     ORG 0000H       ; Reset vector
+0000 020030            4     LJMP MAIN       ; Jump to main program
+                       5     
+0003                   6     ORG 0003H       ; External Interrupt 0 Vector (INT0)
+0003 020040            7     LJMP INT0_ISR   ; Jump to the INT0 Interrupt Service Routine
+                       8     
+                       9     ; ---- Other interrupt vectors are not used, so no need to define
+                      10     
+0030                  11     ORG 0030H       ; Main program starts from here
+0030                  12     MAIN:
+                      13     
+  00B3                14             P1M1 EQU 0B3H        
+  00B4                15             P1M2 EQU 0B4H
+0030 75B3FE           16             MOV P1M1,#0FEH       
+0033 75B401           17             MOV P1M2,#01H        
+                      18         ; Initialize ports
+                      19         
+                      20     
+                      21         ; Interrupt Configuration
+0036 D2A8             22         SETB EX0          ; Enable External Interrupt 0
+0038 D2AF             23         SETB EA           ; Enable global interrupts
+003A C290             24             CLR P1.0
+                      25         ; Configure INT0 for edge-triggered
+003C D288             26         SETB IT0           ; CLR IT0 (IT0=0)   Level triggered (FALLING)
+                      27                           ; SETB IT0 (IT0=1)   EDGE triggered (FALLING)
+                      28     
+003E                  29     MAIN_LOOP:
+003E 80FE             30         SJMP MAIN_LOOP    ; Infinite loop
+                      31     
+                      32     ; ----- INT0 Interrupt Service Routine -----
+0040                  33     INT0_ISR:
+0040 B290             34         CPL P1.0          ; Toggle LED on P1.0
+0042 32               35         RETI              ; Return from interrupt
+                      36     
+                      37     ; ===========================================
+                      38     END
+A51 MACRO ASSEMBLER  EXTERNAL_INTERRUPT                                                   05/03/2025 16:37:27 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+INT0_ISR . . . . .  C ADDR   0040H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+MAIN_LOOP. . . . .  C ADDR   003EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

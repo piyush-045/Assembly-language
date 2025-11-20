@@ -1,0 +1,56 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/03/2025  16:37:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\external_interrupt.obj TO .\Objects\external_interrupt PRINT (.\Listings\external_
+>> interrupt.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\external_interrupt.obj (EXTERNAL_INTERRUPT)
+
+
+LINK MAP OF MODULE:  .\Objects\external_interrupt (EXTERNAL_INTERRUPT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0043H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\external_interrupt (EXTERNAL_INTERRUPT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        EXTERNAL_INTERRUPT
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.0       SYMBOL        EX0
+  C:0040H         SYMBOL        INT0_ISR
+  B:0088H.0       SYMBOL        IT0
+  C:0030H         SYMBOL        MAIN
+  C:003EH         SYMBOL        MAIN_LOOP
+  D:0090H         SYMBOL        P1
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  C:0000H         LINE#         4
+  C:0003H         LINE#         7
+  C:0030H         LINE#         16
+  C:0033H         LINE#         17
+  C:0036H         LINE#         22
+  C:0038H         LINE#         23
+  C:003AH         LINE#         24
+  C:003CH         LINE#         26
+  C:003EH         LINE#         30
+  C:0040H         LINE#         34
+  C:0042H         LINE#         35
+  -------         ENDMOD        EXTERNAL_INTERRUPT
+
+Program Size: data=8.0 xdata=0 code=67
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

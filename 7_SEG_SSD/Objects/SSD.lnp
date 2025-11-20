@@ -1,0 +1,3 @@
+".\Objects\SSD.obj" 
+TO ".\Objects\SSD" 
+PRINT(".\Listings\SSD.m51") RAMSIZE(256) 

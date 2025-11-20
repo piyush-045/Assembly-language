@@ -1,0 +1,94 @@
+A51 MACRO ASSEMBLER  SERIAL_INTRERUPT                                                     05/03/2025 17:43:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\serial_intrerupt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE serial_intrerupt.asm SET(SMALL) DEBUG PRINT(.\Listings\serial_intrerupt
+                      .lst) OBJECT(.\Objects\serial_intrerupt.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ======== UART (Serial) Interrupt Assembly Example =========
+                       2     
+0000                   3     ORG 0000H
+0000 020030            4     LJMP MAIN           ; Reset vector ? Main program
+                       5     
+0023                   6     ORG 0023H           ; UART Interrupt Vector (Serial Interrupt)
+0023 020047            7     LJMP SERIAL_ISR     ; Jump to UART ISR
+                       8     
+0030                   9     ORG 0030H           ; Main program
+0030                  10     MAIN:
+                      11     
+                      12         ; -------- Initialize UART ------------
+0030 758920           13         MOV TMOD, #20H      ; Timer1 Mode2 (8-bit auto-reload) for baud rate
+0033 758DD4           14         MOV TH1, #0D4H      ; Baud rate 9600 (for 16 MHz crystal)
+0036 758BD4           15         MOV TL1, #0D4H      ; Load timer values
+0039 D28E             16         SETB TR1            ; Start Timer1
+                      17     
+003B 759850           18         MOV SCON, #50H      ; Serial Mode 1 (8-bit UART), REN=1 (Receiver Enable)
+                      19                             ; SM0=0, SM1=1, REN=1
+003E D2AC             20         SETB ES             ; Enable Serial Interrupt
+0040 D2AF             21         SETB EA             ; Enable global interrupts
+                      22     
+0042 759000           23         MOV P1, #00H        ; Clear Port 1 (LEDs OFF)
+                      24     
+0045                  25     MAIN_LOOP:
+0045 80FE             26         SJMP MAIN_LOOP      ; Infinite loop
+                      27     
+                      28     ; -------- UART Serial Interrupt Service Routine --------
+                      29     
+                      30     
+                      31     
+                      32     
+                      33     
+0047                  34     SERIAL_ISR:
+0047 309808           35         JNB RI, CHECK_TI    ; Check if RI is set (Receive Interrupt)
+                      36     
+                      37         ; --- Data Received ---
+004A C298             38         CLR RI              ; Clear Receive Interrupt flag
+004C E599             39         MOV A, SBUF         ; Move received data into Accumulator
+004E F590             40         MOV P1, A           ; Output received byte to Port 1 (LEDs)
+                      41     
+0050 8005             42         SJMP EXIT_ISR
+                      43     
+0052                  44     CHECK_TI:
+0052 309902           45         JNB TI, EXIT_ISR    ; Check if TI is set (Transmit complete)
+                      46         
+                      47         ; --- Transmission completed ---
+0055 C299             48         CLR TI              ; Clear Transmit Interrupt flag
+                      49         ; You can add code to send next byte if needed.
+                      50     
+0057                  51     EXIT_ISR:
+0057 32               52         RETI                ; Return from Interrupt
+                      53     
+                      54     END
+A51 MACRO ASSEMBLER  SERIAL_INTRERUPT                                                     05/03/2025 17:43:46 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK_TI . . . . .  C ADDR   0052H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+EXIT_ISR . . . . .  C ADDR   0057H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+MAIN_LOOP. . . . .  C ADDR   0045H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SERIAL_ISR . . . .  C ADDR   0047H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

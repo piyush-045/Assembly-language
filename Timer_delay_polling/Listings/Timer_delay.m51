@@ -1,0 +1,60 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    04/29/2025  15:54:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\timer_delay.obj TO .\Objects\Timer_delay PRINT (.\Listings\Timer_delay.m51) RAMSIZ
+>> E (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\timer_delay.obj (TIMER_DELAY)
+
+
+LINK MAP OF MODULE:  .\Objects\Timer_delay (TIMER_DELAY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001FH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Timer_delay (TIMER_DELAY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TIMER_DELAY
+  C:0017H         SYMBOL        AGAIN
+  C:000CH         SYMBOL        DELAY
+  C:0006H         SYMBOL        HERE
+  D:0090H         SYMBOL        P1
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  B:0088H.5       SYMBOL        TF0
+  D:008CH         SYMBOL        TH0
+  D:008AH         SYMBOL        TL0
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  C:0000H         LINE#         4
+  C:0003H         LINE#         5
+  C:0006H         LINE#         7
+  C:0008H         LINE#         8
+  C:000AH         LINE#         9
+  C:000CH         LINE#         22
+  C:000FH         LINE#         23
+  C:0012H         LINE#         24
+  C:0015H         LINE#         25
+  C:0017H         LINE#         26
+  C:001AH         LINE#         27
+  C:001CH         LINE#         28
+  C:001EH         LINE#         29
+  -------         ENDMOD        TIMER_DELAY
+
+Program Size: data=8.0 xdata=0 code=31
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

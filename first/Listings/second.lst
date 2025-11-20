@@ -1,0 +1,64 @@
+A51 MACRO ASSEMBLER  SECOND                                                               04/26/2025 16:57:52 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\second.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE second.asm SET(SMALL) DEBUG PRINT(.\Listings\second.lst) OBJECT(.\Objec
+                      ts\second.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+                       2             
+  0090                 3             LED BIT P1.0
+  00B3                 4             P1M1 EQU 0B3H        
+  00B4                 5             P1M2 EQU 0B4H
+0000 75B3FE            6             MOV P1M1,#0FEH       
+0003 75B401            7             MOV P1M2,#01H        
+                       8             
+0006                   9             WHILE:
+0006 D290             10             SETB LED            
+0008 1110             11             ACALL DELAY
+                      12             
+                      13             
+000A B290             14             CPL LED             
+000C 1110             15             ACALL DELAY
+000E 80F6             16             SJMP WHILE
+                      17             
+                      18     ;DELAY SUBROUTINE
+                      19     
+0010                  20     DELAY: 
+0010 7F64             21         MOV R7,#100
+0012 7E64             22     D1:     MOV R6,#100
+0014 7D64             23     D2:     MOV R5,#100
+0016 DDFE             24     D3: DJNZ R5,D3
+0018 DEFA             25         DJNZ R6,D2
+001A DFF6             26             DJNZ R7,D1
+001C 22               27             RET
+                      28             
+                      29     END
+                                     
+                                     
+A51 MACRO ASSEMBLER  SECOND                                                               04/26/2025 16:57:52 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   0012H   A   
+D2 . . . . . . . .  C ADDR   0014H   A   
+D3 . . . . . . . .  C ADDR   0016H   A   
+DELAY. . . . . . .  C ADDR   0010H   A   
+LED. . . . . . . .  B ADDR   0090H.0 A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+WHILE. . . . . . .  C ADDR   0006H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

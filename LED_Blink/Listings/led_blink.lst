@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  LED_BLINK                                                            04/29/2025 16:03:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\led_blink.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE led_blink.asm SET(SMALL) DEBUG PRINT(.\Listings\led_blink.lst) OBJECT(.
+                      \Objects\led_blink.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+                       2             
+  0090                 3                     LED BIT P1.0
+  00B3                 4                     P1M1 EQU 0B3H        
+  00B4                 5                     P1M2 EQU 0B4H
+0000 75B3FE            6                     MOV P1M1,#0FEH       
+0003 75B401            7                     MOV P1M2,#01H        
+                       8             
+                       9             
+                      10     
+                      11     
+                      12             
+0006 D290             13     WHILE:  SETB LED            
+0008 1110             14                     ACALL DELAY
+                      15               
+                      16              
+000A B290             17             CPL LED             
+000C 1110             18             ACALL DELAY
+000E 80F6             19             SJMP WHILE
+                      20             
+                      21     ;DELAY SUBROUTINE
+                      22     
+0010 7F64             23     DELAY:  MOV R7,#100
+0012 7E9C             24     D1:             MOV R6,#156
+0014 7DFF             25     D2:             MOV R5,#255
+0016 DDFE             26     D3:     DJNZ R5,D3
+0018 DEFA             27                     DJNZ R6,D2
+001A DFF6             28                     DJNZ R7,D1
+001C 22               29                     RET
+                      30     END
+                                     
+                                     
+A51 MACRO ASSEMBLER  LED_BLINK                                                            04/29/2025 16:03:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   0012H   A   
+D2 . . . . . . . .  C ADDR   0014H   A   
+D3 . . . . . . . .  C ADDR   0016H   A   
+DELAY. . . . . . .  C ADDR   0010H   A   
+LED. . . . . . . .  B ADDR   0090H.0 A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+WHILE. . . . . . .  C ADDR   0006H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

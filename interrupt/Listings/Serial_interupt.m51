@@ -1,0 +1,74 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/03/2025  17:43:46  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\serial_intrerupt.obj TO .\Objects\Serial_interupt PRINT (.\Listings\Serial_interup
+>> t.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\serial_intrerupt.obj (SERIAL_INTRERUPT)
+
+
+LINK MAP OF MODULE:  .\Objects\Serial_interupt (SERIAL_INTRERUPT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0058H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Serial_interupt (SERIAL_INTRERUPT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SERIAL_INTRERUPT
+  C:0052H         SYMBOL        CHECK_TI
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.4       SYMBOL        ES
+  C:0057H         SYMBOL        EXIT_ISR
+  C:0030H         SYMBOL        MAIN
+  C:0045H         SYMBOL        MAIN_LOOP
+  D:0090H         SYMBOL        P1
+  B:0098H.0       SYMBOL        RI
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  C:0047H         SYMBOL        SERIAL_ISR
+  D:008DH         SYMBOL        TH1
+  B:0098H.1       SYMBOL        TI
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:0000H         LINE#         4
+  C:0023H         LINE#         7
+  C:0030H         LINE#         13
+  C:0033H         LINE#         14
+  C:0036H         LINE#         15
+  C:0039H         LINE#         16
+  C:003BH         LINE#         18
+  C:003EH         LINE#         20
+  C:0040H         LINE#         21
+  C:0042H         LINE#         23
+  C:0045H         LINE#         26
+  C:0047H         LINE#         35
+  C:004AH         LINE#         38
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/03/2025  17:43:46  PAGE 2
+
+
+  C:004CH         LINE#         39
+  C:004EH         LINE#         40
+  C:0050H         LINE#         42
+  C:0052H         LINE#         45
+  C:0055H         LINE#         48
+  C:0057H         LINE#         52
+  -------         ENDMOD        SERIAL_INTRERUPT
+
+Program Size: data=8.0 xdata=0 code=88
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

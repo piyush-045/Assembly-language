@@ -1,0 +1,3 @@
+".\Objects\serial_intrerupt.obj" 
+TO ".\Objects\Serial_interupt" 
+PRINT(".\Listings\Serial_interupt.m51") RAMSIZE(256) 
