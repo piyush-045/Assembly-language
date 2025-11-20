@@ -1,0 +1,158 @@
+A51 MACRO ASSEMBLER  TESTING                                                              05/17/2025 12:03:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+NO OBJECT MODULE REQUESTED
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE TESTING.asm SET(SMALL) DEBUG PRINT(.\Listings\TESTING.lst) OBJECT(.\Obj
+                      ects\TESTING.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020030            2         LJMP MAIN
+                       3     
+0030                   4     ORG 0030H
+0030                   5     MAIN:
+                       6         ; Set P1.5 (PWM0) as push-pull
+0030                   7         MOV     P1M1, #00H
+*** _____________________________________^
+*** ERROR #A45 IN 7 (TESTING.asm, LINE 7): UNDEFINED SYMBOL (PASS-2)
+0033                   8         MOV     P1M2, #20H
+*** _____________________________________^
+*** ERROR #A45 IN 8 (TESTING.asm, LINE 8): UNDEFINED SYMBOL (PASS-2)
+                       9     
+                      10         ; PWM Clock: Fsys / 8 = 2 MHz
+0036                  11         MOV     PWMCON1, #08H
+*** _____________________________________^
+*** ERROR #A45 IN 11 (TESTING.asm, LINE 11): UNDEFINED SYMBOL (PASS-2)
+                      12     
+                      13         ; Start PWM module
+0039                  14         ORL     PWMCON0, #01H  ; Enable PWM0
+*** _____________________________________^
+*** ERROR #A45 IN 14 (TESTING.asm, LINE 14): UNDEFINED SYMBOL (PASS-2)
+003C                  15         ORL     PWMCON0, #80H  ; PWM run
+*** _____________________________________^
+*** ERROR #A45 IN 15 (TESTING.asm, LINE 15): UNDEFINED SYMBOL (PASS-2)
+                      16     
+                      17         ; ===== Play Melody =====
+                      18     
+                      19         ; Note 1: C4 (262 Hz)
+003F 758307           20         MOV     DPH, #07H
+0042                  21         MOV     DPL, #D0H      ; 2000 = 2MHz/1000Hz
+*** ___________________________________________^
+*** ERROR #A45 IN 21 (TESTING.asm, LINE 21): UNDEFINED SYMBOL (PASS-2)
+0045 1159             22         ACALL   PLAY_NOTE
+                      23     
+                      24         ; Note 2: C4 again
+0047 758307           25         MOV     DPH, #07H
+004A                  26         MOV     DPL, #D0H
+*** ___________________________________________^
+*** ERROR #A45 IN 26 (TESTING.asm, LINE 26): UNDEFINED SYMBOL (PASS-2)
+004D 1159             27         ACALL   PLAY_NOTE
+                      28     
+                      29         ; Note 3: G4 (392 Hz)
+004F 758304           30         MOV     DPH, #04H
+0052                  31         MOV     DPL, #E2H      ; ~1250 = 2MHz/1600Hz
+*** ___________________________________________^
+*** ERROR #A45 IN 31 (TESTING.asm, LINE 31): UNDEFINED SYMBOL (PASS-2)
+0055 1159             32         ACALL   PLAY_NOTE
+                      33     
+0057                  34     HERE:
+0057 80FE             35         SJMP HERE
+                      36     
+                      37     ; ========== SUBROUTINE TO PLAY ONE NOTE ==========
+                      38     
+0059                  39     PLAY_NOTE:
+                      40         ; Set period
+0059 E583             41         MOV     A, DPH
+A51 MACRO ASSEMBLER  TESTING                                                              05/17/2025 12:03:56 PAGE     2
+
+005B                  42         MOV     PWMPH, A
+*** _____________________________________^
+*** ERROR #A45 IN 42 (TESTING.asm, LINE 42): UNDEFINED SYMBOL (PASS-2)
+005D E582             43         MOV     A, DPL
+005F                  44         MOV     PWMPL, A
+*** _____________________________________^
+*** ERROR #A45 IN 44 (TESTING.asm, LINE 44): UNDEFINED SYMBOL (PASS-2)
+                      45     
+                      46         ; Duty = Period / 2 (50%)
+0061 A882             47         MOV     R0, DPL
+0063 A983             48         MOV     R1, DPH
+0065 C3               49         CLR     C
+0066                  50         RRC     R1
+*** _____________________________________^
+*** ERROR #A40 IN 50 (TESTING.asm, LINE 50): INVALID REGISTER
+0066                  51         RRC     R0
+*** _____________________________________^
+*** ERROR #A40 IN 51 (TESTING.asm, LINE 51): INVALID REGISTER
+0066                  52         MOV     PWM0H, R1
+*** _____________________________________^
+*** ERROR #A45 IN 52 (TESTING.asm, LINE 52): UNDEFINED SYMBOL (PASS-2)
+0068                  53         MOV     PWM0L, R0
+*** _____________________________________^
+*** ERROR #A45 IN 53 (TESTING.asm, LINE 53): UNDEFINED SYMBOL (PASS-2)
+                      54     
+                      55         ; ======= Delay for Note Duration =======
+                      56         ; Simple delay loop ~300ms
+006A 7A14             57         MOV     R2, #20
+006C 7BFF             58         MOV     R3, #255
+006E                  59     DLY1:
+006E 7CFF             60         MOV     R4, #255
+0070                  61     DLY2:
+0070 DCFE             62         DJNZ    R4, DLY2
+0072 DBFA             63         DJNZ    R3, DLY1
+0074 DAF8             64         DJNZ    R2, DLY1
+                      65     
+                      66         ; Stop note (set duty = 0)
+0076                  67         MOV     PWM0H, #00
+*** _____________________________________^
+*** ERROR #A45 IN 67 (TESTING.asm, LINE 67): UNDEFINED SYMBOL (PASS-2)
+0079                  68         MOV     PWM0L, #00
+*** _____________________________________^
+*** ERROR #A45 IN 68 (TESTING.asm, LINE 68): UNDEFINED SYMBOL (PASS-2)
+                      69     
+                      70         ; Small delay between notes
+007C 7A03             71         MOV     R2, #3
+007E 7BFF             72         MOV     R3, #255
+0080                  73     DLY3:
+0080 7CFF             74         MOV     R4, #255
+0082                  75     DLY4:
+0082 DCFE             76         DJNZ    R4, DLY4
+0084 DBFA             77         DJNZ    R3, DLY3
+0086 DAF8             78         DJNZ    R2, DLY3
+                      79     
+0088 22               80         RET
+                      81     END
+A51 MACRO ASSEMBLER  TESTING                                                              05/17/2025 12:03:56 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0H. . . . . . . .    ----   -----       
+DLY1 . . . . . . .  C ADDR   006EH   A   
+DLY2 . . . . . . .  C ADDR   0070H   A   
+DLY3 . . . . . . .  C ADDR   0080H   A   
+DLY4 . . . . . . .  C ADDR   0082H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+E2H. . . . . . . .    ----   -----       
+HERE . . . . . . .  C ADDR   0057H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1M1 . . . . . . .    ----   -----       
+P1M2 . . . . . . .    ----   -----       
+PLAY_NOTE. . . . .  C ADDR   0059H   A   
+PWM0H. . . . . . .    ----   -----       
+PWM0L. . . . . . .    ----   -----       
+PWMCON0. . . . . .    ----   -----       
+PWMCON1. . . . . .    ----   -----       
+PWMPH. . . . . . .    ----   -----       
+PWMPL. . . . . . .    ----   -----       
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 16 ERROR(S)

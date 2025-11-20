@@ -1,0 +1,145 @@
+A51 MACRO ASSEMBLER  PWM_TESTING                                                          05/19/2025 10:00:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\PWM_Testing.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE PWM_Testing.asm SET(SMALL) DEBUG PRINT(.\Listings\PWM_Testing.lst) OBJE
+                      CT(.\Objects\PWM_Testing.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+                       2     
+                       3     ; --- Register Definitions ---
+  00B3                 4     P1M1       EQU 0B3H
+  00B4                 5     P1M2       EQU 0B4H
+  00D8                 6     PWMCON0    EQU 0D8H
+  00DF                 7     PWMCON1    EQU 0DFH
+  00D1                 8     PWMPH      EQU 0D1H
+  00D9                 9     PWMPL      EQU 0D9H
+  00D4                10     PWM2H      EQU 0D4H
+  00DC                11     PWM2L      EQU 0DCH
+  00DE                12     PIOCON0    EQU 0DEH
+  008E                13     CKCON      EQU 8EH
+                      14     
+                      15     ; --- Initialize P1.0 as Push-Pull Output ---
+0000 75B300           16     MOV P1M1, #00H
+0003 75B400           17     MOV P1M2, #00H
+0006 43B300           18     ORL P1M1, #00000000B
+0009 43B401           19     ORL P1M2, #00000001B   ; P1.0 push-pull
+                      20     
+                      21     ; --- Main Program ---
+000C                  22     MAIN:
+000C 1112             23             ACALL PWM_CONFIG
+000E 1120             24             ACALL MISSION_MELODY
+0010 80FE             25     HERE:   SJMP HERE
+                      26     
+                      27     ; --- PWM Configuration ---
+0012                  28     PWM_CONFIG:
+0012 D2DC             29             SETB PWMCON0.4          ; Clear counter
+0014 758E00           30             MOV CKCON, #00H
+0017 75DF03           31             MOV PWMCON1, #03H       ; Prescaler = Fsys / 8
+001A 75DE04           32             MOV PIOCON0, #04H       ; Enable PWM2 on P1.0
+001D D2DF             33             SETB PWMCON0.7          ; Start PWM
+001F 22               34             RET
+                      35     
+                      36     ; --- Play Mission: Impossible Melody ---
+0020                  37     MISSION_MELODY:
+0020 900050           38             MOV DPTR, #MISSION_TABLE
+0023 7D0C             39             MOV R5, #MELODY_LEN
+                      40     
+0025                  41     NEXT_NOTE:
+0025 E4               42             CLR A
+0026 93               43             MOVC A, @A+DPTR
+0027 F5D1             44             MOV PWMPH, A
+0029 FF               45             MOV R7, A
+002A A3               46             INC DPTR
+                      47     
+002B E4               48             CLR A
+002C 93               49             MOVC A, @A+DPTR
+002D F5D9             50             MOV PWMPL, A
+002F FE               51             MOV R6, A
+0030 A3               52             INC DPTR
+                      53     
+                      54             ; 50% Duty = Period / 2
+0031 C3               55             CLR C
+0032 EF               56             MOV A, R7
+0033 13               57             RRC A
+A51 MACRO ASSEMBLER  PWM_TESTING                                                          05/19/2025 10:00:57 PAGE     2
+
+0034 F5D4             58             MOV PWM2H, A
+0036 EE               59             MOV A, R6
+0037 13               60             RRC A
+0038 F5DC             61             MOV PWM2L, A
+                      62     
+003A D2DE             63             SETB PWMCON0.6
+003C 1143             64             ACALL TONE_DELAY
+                      65     
+003E DDE5             66             DJNZ R5, NEXT_NOTE
+0040 C2DF             67             CLR PWMCON0.7
+0042 22               68             RET
+                      69     
+                      70     ; --- Tone Delay (~100ms adjustable) ---
+0043                  71     TONE_DELAY:
+0043 7A0E             72             MOV R2, #14
+0045 79B4             73     DL1:    MOV R1, #180
+0047 78FF             74     DL2:    MOV R0, #255
+0049 D8FE             75     DL3:    DJNZ R0, DL3
+004B D9FA             76             DJNZ R1, DL2
+004D DAF6             77             DJNZ R2, DL1
+004F 22               78             RET
+                      79     
+                      80     ; --- Note Table (first 12 notes of "Mission: Impossible") ---
+                      81     ; Format: PWMPH, PWMPL (16-bit period)
+0050                  82     MISSION_TABLE:
+0050 13EE             83             DB 0x13, 0xEE   ; G4
+0052 0FD2             84             DB 0x0F, 0xD2   ; B4
+0054 13EE             85             DB 0x13, 0xEE   ; G4
+0056 0FD2             86             DB 0x0F, 0xD2   ; B4
+0058 13EE             87             DB 0x13, 0xEE   ; G4
+005A 0EEE             88             DB 0x0E, 0xEE   ; C5
+005C 13EE             89             DB 0x13, 0xEE   ; G4
+005E 0FD2             90             DB 0x0F, 0xD2   ; B4
+0060 13EE             91             DB 0x13, 0xEE   ; G4
+0062 0FD2             92             DB 0x0F, 0xD2   ; B4
+0064 13EE             93             DB 0x13, 0xEE   ; G4
+0066 0EEE             94             DB 0x0E, 0xEE   ; C5
+                      95     
+  000C                96     MELODY_LEN EQU 12
+                      97     
+                      98     END
+A51 MACRO ASSEMBLER  PWM_TESTING                                                          05/19/2025 10:00:57 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CKCON. . . . . . .  N NUMB   008EH   A   
+DL1. . . . . . . .  C ADDR   0045H   A   
+DL2. . . . . . . .  C ADDR   0047H   A   
+DL3. . . . . . . .  C ADDR   0049H   A   
+HERE . . . . . . .  C ADDR   0010H   A   
+MAIN . . . . . . .  C ADDR   000CH   A   
+MELODY_LEN . . . .  N NUMB   000CH   A   
+MISSION_MELODY . .  C ADDR   0020H   A   
+MISSION_TABLE. . .  C ADDR   0050H   A   
+NEXT_NOTE. . . . .  C ADDR   0025H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+PIOCON0. . . . . .  N NUMB   00DEH   A   
+PWM2H. . . . . . .  N NUMB   00D4H   A   
+PWM2L. . . . . . .  N NUMB   00DCH   A   
+PWMCON0. . . . . .  N NUMB   00D8H   A   
+PWMCON1. . . . . .  N NUMB   00DFH   A   
+PWMPH. . . . . . .  N NUMB   00D1H   A   
+PWMPL. . . . . . .  N NUMB   00D9H   A   
+PWM_CONFIG . . . .  C ADDR   0012H   A   
+TONE_DELAY . . . .  C ADDR   0043H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

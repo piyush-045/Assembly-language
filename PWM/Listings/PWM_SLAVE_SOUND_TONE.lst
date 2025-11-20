@@ -1,0 +1,144 @@
+A51 MACRO ASSEMBLER  PWM_SLAVE_SOUND_TONE                                                 05/19/2025 09:25:08 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\PWM_SLAVE_SOUND_TONE.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE PWM_SLAVE_SOUND_TONE.asm SET(SMALL) DEBUG PRINT(.\Listings\PWM_SLAVE_SO
+                      UND_TONE.lst) OBJECT(.\Objects\PWM_SLAVE_SOUND_TONE.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+                       2     
+                       3     ; --- Register Definitions ---
+  00B3                 4     P1M1       EQU 0B3H
+  00B4                 5     P1M2       EQU 0B4H
+  00D8                 6     PWMCON0    EQU 0D8H
+  00DF                 7     PWMCON1    EQU 0DFH
+  00D1                 8     PWMPH      EQU 0D1H
+  00D9                 9     PWMPL      EQU 0D9H
+  00D4                10     PWM2H      EQU 0D4H
+  00DC                11     PWM2L      EQU 0DCH
+  00DE                12     PIOCON0    EQU 0DEH
+  008E                13     CKCON      EQU 8EH
+                      14             
+                      15     ; --- Initialize P1.0 as push-pull output ---
+                      16                             
+0000 75B300           17     MOV P1M1, #00H   ; P1.0 = output
+0003 75B400           18     MOV P1M2, #00H   ; P1.0 = push-pull
+0006 43B300           19     ORL P1M1, #00000000B   ; P1.0 = output
+0009 43B4FF           20     ORL P1M2, #11111111B   ; P1.0 = push-pull
+                      21     
+                      22                             
+                      23     ; --- Main Program ---
+000C                  24     MAIN:    
+000C 1112             25                 ACALL PWM_CONFIG
+000E 1120             26                 ACALL SA_RE_GA_MA_MELODY   ; Play melody before starting PWM loop
+                      27     
+0010 80FE             28     HERE:       SJMP HERE
+                      29     
+                      30     ; --- PWM Configuration ---
+0012                  31     PWM_CONFIG:
+0012 D2DC             32                 SETB PWMCON0.4         ; Clear counter
+0014 758E00           33                 MOV CKCON, #00H        ; System clock base config
+0017 75DF03           34                 MOV PWMCON1, #03H      ; Prescaler = Fsys / 8
+001A 75DE04           35                 MOV PIOCON0, #04H      ; Enable PWM0 CH2 on P1.0
+001D D2DF             36                             SETB PWMCON0.7
+001F 22               37                 RET
+                      38     
+                      39     ; --- Play Melody ---
+0020                  40     SA_RE_GA_MA_MELODY:
+0020 900053           41                 MOV DPTR, #NOTE_TABLE  ; Note period values
+0023 7D0A             42                 MOV R5, #10            ; 10 notes
+                      43     
+0025                  44     NEXT_NOTE:
+0025 E4               45                 CLR A
+0026 93               46                 MOVC A, @A+DPTR
+0027 F5D1             47                 MOV PWMPH, A
+0029 AFD1             48                 MOV R7, PWMPH             ; Store for division
+002B A3               49                 INC DPTR
+                      50     
+002C E4               51                 CLR A
+002D 93               52                 MOVC A, @A+DPTR
+002E F5D9             53                 MOV PWMPL, A
+0030 AED9             54                 MOV R6, PWMPL              ; Store for division
+0032 A3               55                 INC DPTR
+                      56     
+                      57                 ; --- 16-bit divide period by 2 for 50% duty ---
+A51 MACRO ASSEMBLER  PWM_SLAVE_SOUND_TONE                                                 05/19/2025 09:25:08 PAGE     2
+
+0033 C3               58                 CLR C
+0034 EF               59                 MOV A,R7
+0035 13               60                 RRC A
+0036 FF               61                 MOV R7,A
+0037 13               62                 RRC A
+0038 FE               63                 MOV R6,A
+0039 8FD4             64                 MOV PWM2H, R7
+003B 8EDC             65                 MOV PWM2L, R6
+                      66                             
+                      67                 
+003D D2DE             68                 SETB PWMCON0.6          ; Reload PWM period and duty 
+003F 1146             69                 ACALL TONE_DELAY
+0041 DDE2             70                             DJNZ R5, NEXT_NOTE   ; TONE_DELAY       ; 100ms tone
+0043 C2DF             71                             CLR PWMCON0.7
+                      72     
+0045 22               73                 RET
+                      74     
+                      75     ; --- Tone Delay (approx. 100ms) ---
+0046                  76     TONE_DELAY:
+0046 7A0F             77                 MOV R2, #15   ; Adjusted delay for better note distinction
+0048 79B4             78     DL1:        MOV R1, #180
+004A 78FF             79     DL2:        MOV R0, #255
+004C D8FE             80     DL3:        DJNZ R0, DL3
+004E D9FA             81                 DJNZ R1, DL2
+0050 DAF6             82                 DJNZ R2, DL1
+0052 22               83                 RET
+                      84     
+                      85     ; Format: PWMPH, PWMPL (16-bit period)
+0053                  86     NOTE_TABLE:
+0053 1DD1             87                 DB 0x1D, 0xD1   ; Sa (C4)
+0055 1A93             88                 DB 0x1A, 0x93   ; Re (D4)
+0057 17B5             89                 DB 0x17, 0xB5   ; Ga (E4)
+0059 1663             90                 DB 0x16, 0x63   ; Ma (F4)
+005B 13EE             91                 DB 0x13, 0xEE   ; Pa (G4)
+005D 11C1             92                 DB 0x11, 0xC1   ; Dha (A4)
+005F 0FD2             93                 DB 0x0F, 0xD2   ; Ni (B4)
+0061 0EEE             94                 DB 0x0E, 0xEE   ; Sa (C5)
+0063 0D49             95                 DB 0x0D, 0x49   ; Re (D5)
+0065 0BD6             96                 DB 0x0B, 0xD6   ; Ga (E5)
+                      97     
+                      98     END
+A51 MACRO ASSEMBLER  PWM_SLAVE_SOUND_TONE                                                 05/19/2025 09:25:08 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CKCON. . . . . . .  N NUMB   008EH   A   
+DL1. . . . . . . .  C ADDR   0048H   A   
+DL2. . . . . . . .  C ADDR   004AH   A   
+DL3. . . . . . . .  C ADDR   004CH   A   
+HERE . . . . . . .  C ADDR   0010H   A   
+MAIN . . . . . . .  C ADDR   000CH   A   
+NEXT_NOTE. . . . .  C ADDR   0025H   A   
+NOTE_TABLE . . . .  C ADDR   0053H   A   
+P1M1 . . . . . . .  N NUMB   00B3H   A   
+P1M2 . . . . . . .  N NUMB   00B4H   A   
+PIOCON0. . . . . .  N NUMB   00DEH   A   
+PWM2H. . . . . . .  N NUMB   00D4H   A   
+PWM2L. . . . . . .  N NUMB   00DCH   A   
+PWMCON0. . . . . .  N NUMB   00D8H   A   
+PWMCON1. . . . . .  N NUMB   00DFH   A   
+PWMPH. . . . . . .  N NUMB   00D1H   A   
+PWMPL. . . . . . .  N NUMB   00D9H   A   
+PWM_CONFIG . . . .  C ADDR   0012H   A   
+SA_RE_GA_MA_MELODY  C ADDR   0020H   A   
+TONE_DELAY . . . .  C ADDR   0046H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

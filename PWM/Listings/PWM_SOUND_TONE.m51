@@ -1,0 +1,108 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/16/2025  11:28:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\PWM_SOUND_TONE.obj TO .\Objects\PWM_SOUND_TONE PRINT (.\Listings\PWM_SOUND_TONE.m5
+>> 1) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\PWM_SOUND_TONE.obj (PWM_SOUND_TONE)
+
+
+LINK MAP OF MODULE:  .\Objects\PWM_SOUND_TONE (PWM_SOUND_TONE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0067H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\PWM_SOUND_TONE (PWM_SOUND_TONE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PWM_SOUND_TONE
+  N:008EH         SYMBOL        CKCON
+  C:0048H         SYMBOL        DL1
+  C:004AH         SYMBOL        DL2
+  C:004CH         SYMBOL        DL3
+  C:000FH         SYMBOL        HERE
+  C:0003H         SYMBOL        MAIN
+  C:0027H         SYMBOL        NEXT_NOTE
+  C:0053H         SYMBOL        NOTE_TABLE
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  N:00DEH         SYMBOL        PIOCON0
+  C:0022H         SYMBOL        PLAY_TONE
+  N:00D4H         SYMBOL        PWM2H
+  N:00DCH         SYMBOL        PWM2L
+  N:00D8H         SYMBOL        PWMCON0
+  N:00DFH         SYMBOL        PWMCON1
+  N:00D1H         SYMBOL        PWMPH
+  N:00D9H         SYMBOL        PWMPL
+  C:0011H         SYMBOL        PWM_CONFIG
+  C:001FH         SYMBOL        PWM_START
+  C:003CH         SYMBOL        SET_DUTY_HALF
+  C:0046H         SYMBOL        TONE_DELAY
+  C:0000H         LINE#         2
+  C:0003H         LINE#         20
+  C:0006H         LINE#         21
+  C:0009H         LINE#         23
+  C:000BH         LINE#         24
+  C:000DH         LINE#         25
+  C:000FH         LINE#         27
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/16/2025  11:28:14  PAGE 2
+
+
+  C:0011H         LINE#         31
+  C:0013H         LINE#         32
+  C:0016H         LINE#         33
+  C:0019H         LINE#         35
+  C:001CH         LINE#         36
+  C:001EH         LINE#         37
+  C:001FH         LINE#         41
+  C:0021H         LINE#         42
+  C:0022H         LINE#         47
+  C:0025H         LINE#         48
+  C:0027H         LINE#         51
+  C:0028H         LINE#         52
+  C:0029H         LINE#         53
+  C:002BH         LINE#         54
+  C:002CH         LINE#         55
+  C:002DH         LINE#         57
+  C:002EH         LINE#         58
+  C:002FH         LINE#         59
+  C:0031H         LINE#         60
+  C:0032H         LINE#         61
+  C:0033H         LINE#         64
+  C:0035H         LINE#         67
+  C:0037H         LINE#         69
+  C:0039H         LINE#         71
+  C:003BH         LINE#         72
+  C:003CH         LINE#         77
+  C:003DH         LINE#         78
+  C:003EH         LINE#         79
+  C:003FH         LINE#         80
+  C:0041H         LINE#         82
+  C:0042H         LINE#         83
+  C:0043H         LINE#         84
+  C:0045H         LINE#         85
+  C:0046H         LINE#         90
+  C:0048H         LINE#         91
+  C:004AH         LINE#         92
+  C:004CH         LINE#         93
+  C:004EH         LINE#         94
+  C:0050H         LINE#         95
+  C:0052H         LINE#         96
+  -------         ENDMOD        PWM_SOUND_TONE
+
+Program Size: data=8.0 xdata=0 code=103
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,104 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/19/2025  10:00:57  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\PWM_Testing.obj TO .\Objects\PWM_TESTING PRINT (.\Listings\PWM_TESTING.m51) RAMSIZ
+>> E (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\PWM_Testing.obj (PWM_TESTING)
+
+
+LINK MAP OF MODULE:  .\Objects\PWM_TESTING (PWM_TESTING)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0068H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\PWM_TESTING (PWM_TESTING)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PWM_TESTING
+  N:008EH         SYMBOL        CKCON
+  C:0045H         SYMBOL        DL1
+  C:0047H         SYMBOL        DL2
+  C:0049H         SYMBOL        DL3
+  C:0010H         SYMBOL        HERE
+  C:000CH         SYMBOL        MAIN
+  N:000CH         SYMBOL        MELODY_LEN
+  C:0020H         SYMBOL        MISSION_MELODY
+  C:0050H         SYMBOL        MISSION_TABLE
+  C:0025H         SYMBOL        NEXT_NOTE
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  N:00DEH         SYMBOL        PIOCON0
+  N:00D4H         SYMBOL        PWM2H
+  N:00DCH         SYMBOL        PWM2L
+  N:00D8H         SYMBOL        PWMCON0
+  N:00DFH         SYMBOL        PWMCON1
+  N:00D1H         SYMBOL        PWMPH
+  N:00D9H         SYMBOL        PWMPL
+  C:0012H         SYMBOL        PWM_CONFIG
+  C:0043H         SYMBOL        TONE_DELAY
+  C:0000H         LINE#         16
+  C:0003H         LINE#         17
+  C:0006H         LINE#         18
+  C:0009H         LINE#         19
+  C:000CH         LINE#         23
+  C:000EH         LINE#         24
+  C:0010H         LINE#         25
+  C:0012H         LINE#         29
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/19/2025  10:00:57  PAGE 2
+
+
+  C:0014H         LINE#         30
+  C:0017H         LINE#         31
+  C:001AH         LINE#         32
+  C:001DH         LINE#         33
+  C:001FH         LINE#         34
+  C:0020H         LINE#         38
+  C:0023H         LINE#         39
+  C:0025H         LINE#         42
+  C:0026H         LINE#         43
+  C:0027H         LINE#         44
+  C:0029H         LINE#         45
+  C:002AH         LINE#         46
+  C:002BH         LINE#         48
+  C:002CH         LINE#         49
+  C:002DH         LINE#         50
+  C:002FH         LINE#         51
+  C:0030H         LINE#         52
+  C:0031H         LINE#         55
+  C:0032H         LINE#         56
+  C:0033H         LINE#         57
+  C:0034H         LINE#         58
+  C:0036H         LINE#         59
+  C:0037H         LINE#         60
+  C:0038H         LINE#         61
+  C:003AH         LINE#         63
+  C:003CH         LINE#         64
+  C:003EH         LINE#         66
+  C:0040H         LINE#         67
+  C:0042H         LINE#         68
+  C:0043H         LINE#         72
+  C:0045H         LINE#         73
+  C:0047H         LINE#         74
+  C:0049H         LINE#         75
+  C:004BH         LINE#         76
+  C:004DH         LINE#         77
+  C:004FH         LINE#         78
+  -------         ENDMOD        PWM_TESTING
+
+Program Size: data=8.0 xdata=0 code=104
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

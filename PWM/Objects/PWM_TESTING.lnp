@@ -1,0 +1,3 @@
+".\Objects\PWM_Testing.obj" 
+TO ".\Objects\PWM_TESTING" 
+PRINT(".\Listings\PWM_TESTING.m51") RAMSIZE(256) 

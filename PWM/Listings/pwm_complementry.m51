@@ -1,0 +1,80 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/30/2025  10:30:21  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\pwm_complementry.obj TO .\Objects\pwm_complementry PRINT (.\Listings\pwm_complemen
+>> try.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\pwm_complementry.obj (PWM_COMPLEMENTRY)
+
+
+LINK MAP OF MODULE:  .\Objects\pwm_complementry (PWM_COMPLEMENTRY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     003BH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\pwm_complementry (PWM_COMPLEMENTRY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PWM_COMPLEMENTRY
+  N:008EH         SYMBOL        CKCON
+  C:000AH         SYMBOL        HERE
+  N:00B3H         SYMBOL        P1M1
+  N:00B4H         SYMBOL        P1M2
+  N:00DEH         SYMBOL        PIOCON0
+  N:00D2H         SYMBOL        PWM0C0H
+  N:00DAH         SYMBOL        PWM0C0L
+  N:00D3H         SYMBOL        PWM0C1H
+  N:00DBH         SYMBOL        PWM0C1L
+  N:00D8H         SYMBOL        PWM0CON0
+  N:00DFH         SYMBOL        PWM0CON1
+  N:00FAH         SYMBOL        PWM0DTCNT
+  N:00F9H         SYMBOL        PWM0DTEN
+  N:00D1H         SYMBOL        PWM0PH
+  N:00D9H         SYMBOL        PWM0PL
+  C:000CH         SYMBOL        PWM_CONFIG
+  C:0036H         SYMBOL        PWM_START
+  N:00C7H         SYMBOL        TA
+  C:0000H         LINE#         6
+  C:0003H         LINE#         7
+  C:0006H         LINE#         45
+  C:0008H         LINE#         46
+  C:000AH         LINE#         47
+  C:000CH         LINE#         52
+  C:000EH         LINE#         54
+  C:0011H         LINE#         55
+  C:0014H         LINE#         65
+  C:0017H         LINE#         66
+  C:001AH         LINE#         68
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/30/2025  10:30:21  PAGE 2
+
+
+  C:001DH         LINE#         69
+  C:0020H         LINE#         75
+  C:0023H         LINE#         76
+  C:0026H         LINE#         77
+  C:0029H         LINE#         78
+  C:002CH         LINE#         79
+  C:002FH         LINE#         80
+  C:0032H         LINE#         81
+  C:0035H         LINE#         83
+  C:0036H         LINE#         86
+  C:0038H         LINE#         87
+  C:003AH         LINE#         88
+  -------         ENDMOD        PWM_COMPLEMENTRY
+
+Program Size: data=8.0 xdata=0 code=59
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
